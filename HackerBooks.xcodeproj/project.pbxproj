@@ -10,6 +10,13 @@
 		73569F791C1C63EE00995141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73569F781C1C63EE00995141 /* AppDelegate.swift */; };
 		73569F7B1C1C63EE00995141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73569F7A1C1C63EE00995141 /* Assets.xcassets */; };
 		73569F7E1C1C63EE00995141 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73569F7C1C1C63EE00995141 /* LaunchScreen.storyboard */; };
+		73569F891C1C668500995141 /* AGTBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73569F881C1C668500995141 /* AGTBook.swift */; };
+		73569F8B1C1C681600995141 /* AGTLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73569F8A1C1C681600995141 /* AGTLibrary.swift */; };
+		73569F8D1C1C694900995141 /* AGTTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73569F8C1C1C694900995141 /* AGTTag.swift */; };
+		736795BA1C1C8CB000EC13E2 /* AGTSimplePDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736795B91C1C8CB000EC13E2 /* AGTSimplePDFViewController.swift */; };
+		73DB830A1C1C7ED1005F1250 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DB83091C1C7ED1005F1250 /* Library.storyboard */; };
+		73DB830C1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DB830B1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift */; };
+		73DB830E1C1C7FE3005F1250 /* AGTBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DB830D1C1C7FE3005F1250 /* AGTBookViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +25,13 @@
 		73569F7A1C1C63EE00995141 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73569F7D1C1C63EE00995141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73569F7F1C1C63EE00995141 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73569F881C1C668500995141 /* AGTBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTBook.swift; sourceTree = "<group>"; };
+		73569F8A1C1C681600995141 /* AGTLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTLibrary.swift; sourceTree = "<group>"; };
+		73569F8C1C1C694900995141 /* AGTTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTTag.swift; sourceTree = "<group>"; };
+		736795B91C1C8CB000EC13E2 /* AGTSimplePDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTSimplePDFViewController.swift; sourceTree = "<group>"; };
+		73DB83091C1C7ED1005F1250 /* Library.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Library.storyboard; sourceTree = "<group>"; };
+		73DB830B1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTLibraryTableViewController.swift; sourceTree = "<group>"; };
+		73DB830D1C1C7FE3005F1250 /* AGTBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTBookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,12 +64,43 @@
 		73569F771C1C63EE00995141 /* HackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				73569F871C1C661A00995141 /* StoryBoards */,
+				73569F861C1C660C00995141 /* Controllers */,
+				73569F851C1C660600995141 /* Model */,
 				73569F781C1C63EE00995141 /* AppDelegate.swift */,
 				73569F7A1C1C63EE00995141 /* Assets.xcassets */,
-				73569F7C1C1C63EE00995141 /* LaunchScreen.storyboard */,
 				73569F7F1C1C63EE00995141 /* Info.plist */,
 			);
 			path = HackerBooks;
+			sourceTree = "<group>";
+		};
+		73569F851C1C660600995141 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73569F881C1C668500995141 /* AGTBook.swift */,
+				73569F8A1C1C681600995141 /* AGTLibrary.swift */,
+				73569F8C1C1C694900995141 /* AGTTag.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		73569F861C1C660C00995141 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				73DB830B1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift */,
+				73DB830D1C1C7FE3005F1250 /* AGTBookViewController.swift */,
+				736795B91C1C8CB000EC13E2 /* AGTSimplePDFViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		73569F871C1C661A00995141 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				73569F7C1C1C63EE00995141 /* LaunchScreen.storyboard */,
+				73DB83091C1C7ED1005F1250 /* Library.storyboard */,
+			);
+			name = StoryBoards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73569F7B1C1C63EE00995141 /* Assets.xcassets in Resources */,
+				73DB830A1C1C7ED1005F1250 /* Library.storyboard in Resources */,
 				73569F7E1C1C63EE00995141 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,7 +174,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73DB830E1C1C7FE3005F1250 /* AGTBookViewController.swift in Sources */,
 				73569F791C1C63EE00995141 /* AppDelegate.swift in Sources */,
+				73569F8B1C1C681600995141 /* AGTLibrary.swift in Sources */,
+				736795BA1C1C8CB000EC13E2 /* AGTSimplePDFViewController.swift in Sources */,
+				73569F891C1C668500995141 /* AGTBook.swift in Sources */,
+				73569F8D1C1C694900995141 /* AGTTag.swift in Sources */,
+				73DB830C1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +289,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.idenjoe.HackerBooks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -248,6 +301,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.idenjoe.HackerBooks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -270,6 +324,7 @@
 				73569F841C1C63EE00995141 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
