@@ -10,14 +10,40 @@ import UIKit
 
 class AGTLibraryTableViewController: UITableViewController {
 
+    var model : AGTLibrary?
+    
+    private  func decodeJSON() ->[AGTBook]?{
+        
+        var result : [AGTBook]? = nil
+        // Obtener la url del fichero
+        // Leemos el fichero JSON a un NSDATA (esto puede salir mal)
+        // Lo parseamos
+        do{
+            if let url = NSURL(string: "https://t.co/K9ziV0z3SJ"),
+                data = NSData(contentsOfURL: url),
+                booksArray = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? JSONArray{
+                    // Todo es fabuloso!!!
+                    result = decode(books: booksArray)
+            }
+            
+        }catch{
+            // Error al parsear el JSON
+            print("la cagamos, en vez de un JSON, me mandaron un camisón del Dávalos")
+            
+        }
+        
+        return result;
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        if let books = decodeJSON(){
+            model = AGTLibrary(arrayofBooks: books)
+            
+        }else{
+            fatalError("Se jodió el invento, no hubo forma de parsear los personajes")
+        }
     }
 
     // MARK: - Table view data source

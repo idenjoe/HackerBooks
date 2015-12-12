@@ -20,9 +20,16 @@ class AGTLibrary {
         
         for eachBook in arrayofBooks{
             for eachTag in eachBook.tags{
-                books[eachTag]?.append(eachBook)
+                if var tag = books[eachTag] {
+                    tag.append(eachBook)
+                }else{
+                    books[eachTag] = Array<AGTBook>()
+                    books[eachTag]?.append(eachBook)
+                }
+                
             }
         }
+        print(books)
     }
     
     var booksCount: Int{

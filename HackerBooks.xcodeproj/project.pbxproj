@@ -17,6 +17,7 @@
 		73DB830A1C1C7ED1005F1250 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73DB83091C1C7ED1005F1250 /* Library.storyboard */; };
 		73DB830C1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DB830B1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift */; };
 		73DB830E1C1C7FE3005F1250 /* AGTBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DB830D1C1C7FE3005F1250 /* AGTBookViewController.swift */; };
+		73F8C4F81C1C9AD000003C16 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F8C4F71C1C9AD000003C16 /* JSONProcessing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		73DB83091C1C7ED1005F1250 /* Library.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Library.storyboard; sourceTree = "<group>"; };
 		73DB830B1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTLibraryTableViewController.swift; sourceTree = "<group>"; };
 		73DB830D1C1C7FE3005F1250 /* AGTBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGTBookViewController.swift; sourceTree = "<group>"; };
+		73F8C4F71C1C9AD000003C16 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				73569F881C1C668500995141 /* AGTBook.swift */,
 				73569F8A1C1C681600995141 /* AGTLibrary.swift */,
 				73569F8C1C1C694900995141 /* AGTTag.swift */,
+				73F8C4F71C1C9AD000003C16 /* JSONProcessing.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				736795BA1C1C8CB000EC13E2 /* AGTSimplePDFViewController.swift in Sources */,
 				73569F891C1C668500995141 /* AGTBook.swift in Sources */,
 				73569F8D1C1C694900995141 /* AGTTag.swift in Sources */,
+				73F8C4F81C1C9AD000003C16 /* JSONProcessing.swift in Sources */,
 				73DB830C1C1C7F9E005F1250 /* AGTLibraryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
