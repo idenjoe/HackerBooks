@@ -11,54 +11,78 @@ import Foundation
 class AGTLibrary {
     
     //MARK: - Properties
-    private var books : [AGTTag:[AGTBook]]
+    private var books : [AGTBook]
     
-    //MARK - Initializers
-    init(arrayofBooks : [AGTBook]){
-        // Initi the dictcionary
-        books = Dictionary<AGTTag, Array<AGTBook>>()
-        
-        for eachBook in arrayofBooks{
-            for eachTag in eachBook.tags{
-                if var tag = books[eachTag] {
-                    tag.append(eachBook)
-                }else{
-                    books[eachTag] = Array<AGTBook>()
-                    books[eachTag]?.append(eachBook)
-                }
-                
+    private var arrayOfTags: [AGTTag]?
+    private var tags : [AGTTag]?{
+        get{
+            if let arrayTags = arrayOfTags{
+                return arrayTags.sort { $0.0.name.lowercaseString < $0.1.name.lowercaseString }
+            }
+            
+            return nil
+        }
+        set{
+            if let newTags = newValue {
+                arrayOfTags = newTags
             }
         }
-        print(books)
+    }
+    
+    //MARK - Initializers
+    init(arrayofBooks : [AGTBook], arrayOfTags: [AGTTag]){
+        // Initi the dictcionary
+        books = arrayofBooks
+        tags = arrayOfTags
     }
     
     var booksCount: Int{
         get{
-            var count = 0
-            for tag in books.keys{
-                if let booksOnTag = books[tag]{
-                    count += booksOnTag.count
-                }
-            }
-            return count
+            return books.count
         }
     }
     
-    func bookCountForTag(tag: AGTTag) -> Int{
-        if let tagBooks = self.books[tag]{
-            return tagBooks.count
+    var countTags: Int{
+        get{
+            if let tags = tags{
+                return tags.count
+            }
+            return 0
+        }
+    }
+    
+    func bookCountForTag(tag: String) -> Int{
+        if let books = booksForTag(tag){
+            return books.count
         }
         
         return 0
     }
     
-    func booksForTag(tag: AGTTag) -> [AGTBook]?{
-        return self.books[tag]
+    func booksForTag(tag: String) -> [AGTBook]?{
+        var booksForTag = [AGTBook]()
+        for book in books{
+            if book.tags.contains(AGTTag(name: tag)){
+                booksForTag.append(book)
+            }
+        }
+        
+        booksForTag = booksForTag.sort { $0.0.title.lowercaseString < $0.1.title.lowercaseString }
+        
+        return booksForTag
     }
     
-    func booksAtIndex(index: Int, tag: AGTTag) -> AGTBook?{
-        if let tagBooks = self.booksForTag(tag){
+    func bookAtIndex(index: Int, tag: AGTTag) -> AGTBook?{
+        if let tagBooks = self.booksForTag(tag.name){
             return tagBooks[index]
+        }
+        
+        return nil
+    }
+    
+    func tagAtIndex(raw: Int) -> AGTTag?{
+        if let tags = tags{
+            return tags[raw]
         }
         
         return nil

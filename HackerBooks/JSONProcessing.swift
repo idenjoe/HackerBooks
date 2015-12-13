@@ -59,15 +59,20 @@ func decode(book json: JSONDictionary) throws -> AGTBook{
     }
     
     let authors = authorsString.componentsSeparatedByString(",")
+    var trimmedAuthors = [String]()
+    for eachAuthor in authors{
+         trimmedAuthors.append(eachAuthor.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
+    }
+    
     let tagsStringsArray = tagsStrings.componentsSeparatedByString(",")
     
     var tags = [AGTTag]()
     for eachTagString in tagsStringsArray{
-        let newTag = AGTTag(name: eachTagString)
+        let newTag = AGTTag(name: eachTagString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
         tags.append(newTag)
     }
     
-    return AGTBook(title: title, author: authors, tags: tags, imageURL: imageURL, pdfURL: pdfURL, isFavorite: false)
+    return AGTBook(title: title, author: trimmedAuthors, tags: tags, imageURL: imageURL, pdfURL: pdfURL, isFavorite: false)
 }
 
 func decode(books json: JSONArray) -> [AGTBook]{
@@ -78,7 +83,6 @@ func decode(books json: JSONArray) -> [AGTBook]{
         // Patearse todo el JSONArray
         for dict in json{
             // JSONDict que veo, JSONDict que convierto en StrictStarWarsCharacter
-            print(dict)
             let s = try decode(book: dict)
             
             // pal saco!
@@ -107,29 +111,3 @@ extension AGTBook{
             isFavorite : c.isFavorite)
     }
 }
-
-
-extension AGTLibrary{
-    
-    convenience init(characters cs: [AGTBook]){
-        
-        // Patearse el array [StrictStarWarsCharacter]
-        var chars = [AGTBook]()
-        for each in cs{
-            // Pa cada uno que encuentre, lo transofrmo en un personaje
-            let c = AGTBook(book: each)
-            // Lo encasqueto en un array
-            chars.append(c)
-        }
-        // le paso el array y el marrón a mi init designado
-        self.init(arrayofBooks: chars)
-    }
-}
-
-
-
-
-
-
-
-

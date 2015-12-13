@@ -39,30 +39,57 @@ class AGTLibraryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let books = decodeJSON(){
-            model = AGTLibrary(arrayofBooks: books)
-            
+            var uniqueTags = [AGTTag]()
+            for book in books{
+                for tag in book.tags{
+                    if !uniqueTags.contains(tag){
+                        uniqueTags.append(tag)
+                    }
+                }
+            }
+            model = AGTLibrary(arrayofBooks: books, arrayOfTags: uniqueTags)
         }else{
-            fatalError("Se jodió el invento, no hubo forma de parsear los personajes")
+            fatalError("Se jodió el invento, no hubo forma de parsear los libros")
         }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        if let countTags = model?.countTags{
+            return countTags
+        }
+        
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        if let tag = model?.tagAtIndex(section){
+            return model!.bookCountForTag(tag.name)
+        }
+        
+        return 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath)
-
+        let tagSelected = model?.tagAtIndex(indexPath.section)
+        let selectedBook = model?.bookAtIndex(indexPath.row, tag: tagSelected!)
+        
+        cell.textLabel?.text = selectedBook?.title
+        cell.detailTextLabel?.text = selectedBook?.authors
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if let tagSelected = model?.tagAtIndex(section){
+            return tagSelected.name
+        }
+        
+        return nil
     }
 
 }

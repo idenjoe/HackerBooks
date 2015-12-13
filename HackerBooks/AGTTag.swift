@@ -10,7 +10,19 @@ import Foundation
 
 class AGTTag : Hashable, Comparable {
     //MARK - Properties
-    var name : String
+    private var _name: String? = nil
+    var name : String{
+        set{
+            self._name = newValue
+        }
+        get {
+            if let name = _name{
+                return name.lowercaseString.capitalizedString
+            }
+            
+            return ""
+        }
+    }
     var hashValue : Int{
         get{
             return name.hashValue
@@ -22,6 +34,8 @@ class AGTTag : Hashable, Comparable {
     init(name: String){
         self.name = name
     }
+    
+    
     
     var proxyForSorting : String{
         get{
@@ -37,4 +51,14 @@ func ==(lhs: AGTTag, rhs: AGTTag) -> Bool {
 func <(lhs: AGTTag, rhs: AGTTag) -> Bool{
     
     return (lhs.proxyForSorting < rhs.proxyForSorting)
+}
+
+extension AGTTag: CustomStringConvertible{
+    
+    var description: String{
+        
+        get{
+            return "<\(self.dynamicType): \(name)>"
+        }
+    }
 }

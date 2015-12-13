@@ -18,6 +18,11 @@ class AGTBook {
     let pdfURL : NSURL
     let isFavorite : Bool
     
+    var authors : String{
+        get{
+            return author.joinWithSeparator(", ")
+        }
+    }
     
     //MARK: - Initializers
     init(title : String,
@@ -32,5 +37,15 @@ class AGTBook {
             self.imageURL = imageURL
             self.pdfURL = pdfURL
             self.isFavorite = isFavorite
+    }
+}
+
+extension AGTBook: CustomStringConvertible{
+    
+    var description: String{
+        
+        get{
+            return "<\(self.dynamicType): \(title)>"
+        }
     }
 }
