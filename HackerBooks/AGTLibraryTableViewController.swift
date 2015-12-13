@@ -88,14 +88,30 @@ class AGTLibraryTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as? AGTBookViewCell
         let tagSelected = model?.tagAtIndex(indexPath.section)
         let selectedBook = model?.bookAtIndex(indexPath.row, tag: tagSelected!)
         
-        cell.textLabel?.text = selectedBook?.title
-        cell.detailTextLabel?.text = selectedBook?.authors
+        cell!.titleBookLabel.text = selectedBook?.title
+        cell!.authorsBookLabel.text = selectedBook?.authors
+        if let isFavorite = selectedBook?.isFavorite{
+            if isFavorite{
+                cell!.favIconButton.select()
+            }else{
+                cell!.favIconButton.deselect()
+            }
+        }
+        
+        if let imageURL = selectedBook?.imageURL {
+            let stringURL = "\(imageURL)"
+            ImageLoader.sharedLoader.imageForUrl(stringURL, completionHandler:{(image: UIImage?, url: String) in
+                cell!.bookCellImageView.image = image
+            })
+        }
+        
+        cell!.book = selectedBook
 
-        return cell
+        return cell!
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -105,6 +121,18 @@ class AGTLibraryTableViewController: UITableViewController {
         }
         
         return nil
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if (self.splitViewController?.viewControllers.count > 1) {
+            let detailVC = self.splitViewController!.viewControllers[1] as? UINavigationController
+            if detailVC?.viewControllers.count > 1{
+                NSNotificationCenter.defaultCenter().postNotificationName("BookChanged", object: nil)
+                return false
+            }
+        }
+        
+        return true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -120,16 +148,9 @@ class AGTLibraryTableViewController: UITableViewController {
     }
     
     func favoriteChanged(notification: NSNotification) {
-        let book = notification.object as? AGTBook
-        if let favorite = book?.isFavorite{
-            if favorite{
-                // Añadir a favoritos
-            }else{
-                // Eliminar de favoritos
-            }
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.tableView.reloadData()
         }
-        
-        self.tableView.reloadData()
     }
     
     deinit{

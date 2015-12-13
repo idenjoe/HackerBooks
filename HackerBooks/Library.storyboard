@@ -227,34 +227,94 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" textLabel="yqF-gm-LOi" detailTextLabel="ezT-3t-2pb" style="IBUITableViewCellStyleSubtitle" id="UWE-nC-uM6">
-                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="50" id="UWE-nC-uM6" customClass="AGTBookViewCell" customModule="HackerBooks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UWE-nC-uM6" id="Q9R-qu-2h8">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yqF-gm-LOi">
-                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ra-Nd-z0l" customClass="DOFavoriteButton" customModule="HackerBooks" customModuleProvider="target">
+                                            <rect key="frame" x="534" y="10" width="50" height="30"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                                            </accessibility>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="2eC-3Z-6WR"/>
+                                            </constraints>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <state key="normal">
+                                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="star.png"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColorOn">
+                                                    <color key="value" red="1" green="0.95419933550000002" blue="0.2168070714" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColorOff">
+                                                    <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                    <color key="value" red="1" green="0.1059448107" blue="0.1091223907" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                    <color key="value" red="1" green="0.95419933550000002" blue="0.2168070714" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YBr-R9-kVj">
+                                            <rect key="frame" x="8" y="8" width="33.5" height="33.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="YBr-R9-kVj" secondAttribute="height" multiplier="1:1" id="4zL-8Y-Mnz"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYv-vM-JOd" userLabel="Title">
+                                            <rect key="frame" x="49" y="8" width="485" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ezT-3t-2pb">
-                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcG-bN-KZi" userLabel="Authors">
+                                            <rect key="frame" x="57" y="27" width="31" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="YBr-R9-kVj" secondAttribute="bottom" id="4v4-kg-Yz0"/>
+                                        <constraint firstItem="EcG-bN-KZi" firstAttribute="top" secondItem="aYv-vM-JOd" secondAttribute="bottom" id="CJB-vb-4Wd"/>
+                                        <constraint firstItem="5ra-Nd-z0l" firstAttribute="leading" secondItem="aYv-vM-JOd" secondAttribute="trailing" id="IiK-Gi-Ohm"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5ra-Nd-z0l" secondAttribute="trailing" constant="8" id="KCX-vG-urb"/>
+                                        <constraint firstItem="EcG-bN-KZi" firstAttribute="leading" secondItem="aYv-vM-JOd" secondAttribute="leading" constant="8" id="Owy-RI-141"/>
+                                        <constraint firstItem="YBr-R9-kVj" firstAttribute="top" secondItem="Q9R-qu-2h8" secondAttribute="topMargin" id="Pgf-dN-FG0"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="EcG-bN-KZi" secondAttribute="bottom" id="QhD-1x-RE7"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="YBr-R9-kVj" secondAttribute="leading" id="TMT-pt-Y28"/>
+                                        <constraint firstItem="aYv-vM-JOd" firstAttribute="leading" secondItem="YBr-R9-kVj" secondAttribute="trailing" constant="8" id="q6F-N9-s8o"/>
+                                        <constraint firstItem="aYv-vM-JOd" firstAttribute="top" secondItem="Q9R-qu-2h8" secondAttribute="topMargin" id="rCQ-03-glZ"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="CJB-vb-4Wd"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="5ra-Nd-z0l" firstAttribute="centerY" secondItem="UWE-nC-uM6" secondAttribute="centerY" id="abL-Px-B6B"/>
+                                </constraints>
                                 <connections>
+                                    <outlet property="authorsBookLabel" destination="EcG-bN-KZi" id="f6Z-El-Z1k"/>
+                                    <outlet property="bookCellImageView" destination="YBr-R9-kVj" id="RmQ-SS-xJe"/>
+                                    <outlet property="favIconButton" destination="5ra-Nd-z0l" id="d6K-yn-sVe"/>
+                                    <outlet property="titleBookLabel" destination="aYv-vM-JOd" id="IvE-Da-Xoc"/>
                                     <segue destination="4oQ-Wp-4sX" kind="showDetail" identifier="showBook" id="YsI-LS-Q00"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="WLD-aW-eXa" id="KYQ-yq-peg"/>
                             <outlet property="delegate" destination="WLD-aW-eXa" id="IpL-VX-P6F"/>

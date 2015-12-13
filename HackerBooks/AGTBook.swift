@@ -18,12 +18,14 @@ class AGTBook {
     let pdfURL : NSURL
     var isFavorite : Bool{
         didSet{
-            if isFavorite {
-                self.arrayOfTags.insert(AGTTag(name: "Favorite"), atIndex: 0)
-            }else{
-                self.arrayOfTags.removeAtIndex(0)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { () -> Void in
+                if self.isFavorite {
+                    self.arrayOfTags.insert(AGTTag(name: "Favorite"), atIndex: 0)
+                }else{
+                    self.arrayOfTags.removeAtIndex(0)
+                }
+                NSNotificationCenter.defaultCenter().postNotificationName("FavoriteChanged",object: self)
             }
-            NSNotificationCenter.defaultCenter().postNotificationName("FavoriteChanged",object: self)
         }
     }
     
