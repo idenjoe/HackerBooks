@@ -278,8 +278,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcG-bN-KZi" userLabel="Authors">
-                                            <rect key="frame" x="57" y="27" width="31" height="14.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <rect key="frame" x="57" y="29.5" width="469" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -293,6 +293,7 @@
                                         <constraint firstItem="YBr-R9-kVj" firstAttribute="top" secondItem="Q9R-qu-2h8" secondAttribute="topMargin" id="Pgf-dN-FG0"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="EcG-bN-KZi" secondAttribute="bottom" id="QhD-1x-RE7"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="YBr-R9-kVj" secondAttribute="leading" id="TMT-pt-Y28"/>
+                                        <constraint firstItem="5ra-Nd-z0l" firstAttribute="leading" secondItem="EcG-bN-KZi" secondAttribute="trailing" constant="8" id="bzo-hi-pgo"/>
                                         <constraint firstItem="aYv-vM-JOd" firstAttribute="leading" secondItem="YBr-R9-kVj" secondAttribute="trailing" constant="8" id="q6F-N9-s8o"/>
                                         <constraint firstItem="aYv-vM-JOd" firstAttribute="top" secondItem="Q9R-qu-2h8" secondAttribute="topMargin" id="rCQ-03-glZ"/>
                                     </constraints>
