@@ -35,10 +35,13 @@ class AGTBookViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func subsCribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "bookChanged:", name: "BookChanged", object: nil)
+    }
+    
+    func unsubscribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func updateUI() {
@@ -94,5 +97,9 @@ class AGTBookViewController: UIViewController {
             sender.select()
             book?.isFavorite = true
         }
+    }
+    
+    func bookChanged(notification: NSNotification){
+        updateUI()
     }
 }

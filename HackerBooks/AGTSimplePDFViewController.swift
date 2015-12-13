@@ -45,11 +45,6 @@ class AGTSimplePDFViewController: UIViewController, UIWebViewDelegate {
             webview.loadRequest(urlRequest)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func bookChanged(notification: NSNotification){
         updateUI()
