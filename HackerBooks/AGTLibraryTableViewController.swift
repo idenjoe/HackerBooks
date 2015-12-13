@@ -38,6 +38,8 @@ class AGTLibraryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Library"
+        // configuring splitviewcontroller
         if let books = decodeJSON(){
             var uniqueTags = [AGTTag]()
             for book in books{
