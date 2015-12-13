@@ -13,10 +13,26 @@ class AGTBook {
     //MARK: - Properties
     let title : String
     let author : [String]
-    let tags : [AGTTag]
+    private var arrayOfTags : [AGTTag]
     let imageURL : NSURL
     let pdfURL : NSURL
-    let isFavorite : Bool
+    var isFavorite : Bool{
+        didSet{
+            if isFavorite {
+                self.arrayOfTags.insert(AGTTag(name: "Favorite"), atIndex: 0)
+            }else{
+                self.arrayOfTags.removeAtIndex(0)
+            }
+            NSNotificationCenter.defaultCenter().postNotificationName("FavoriteChanged",object: self)
+        }
+    }
+    
+    var tags: [AGTTag]{
+        get{
+            return arrayOfTags
+        }
+    }
+    
     
     var authors : String{
         get{
@@ -33,7 +49,7 @@ class AGTBook {
         isFavorite : Bool){
             self.title = title
             self.author = author
-            self.tags = tags
+            self.arrayOfTags = tags
             self.imageURL = imageURL
             self.pdfURL = pdfURL
             self.isFavorite = isFavorite

@@ -54,6 +54,19 @@ class AGTLibraryTableViewController: UITableViewController {
             fatalError("Se jodió el invento, no hubo forma de parsear los libros")
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        subsCribeNotificationModel()
+        self.tableView.reloadData()
+    }
+    
+    func subsCribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "favoriteChanged:", name: "FavoriteChanged", object: nil)
+    }
+    
+    func unsubscribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
     // MARK: - Table view data source
 
@@ -92,6 +105,35 @@ class AGTLibraryTableViewController: UITableViewController {
         }
         
         return nil
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showBook"){
+            print(sender)
+            let ip = self.tableView.indexPathForSelectedRow
+            let selectedTag = model?.tagAtIndex((ip?.section)!)
+            let selectedBook = model?.bookAtIndex((ip?.row)!, tag: selectedTag!)
+            let detailNavVC = segue.destinationViewController as? UINavigationController
+            let bookVC = detailNavVC?.viewControllers.first as? AGTBookViewController
+            bookVC?.book = selectedBook
+        }
+    }
+    
+    func favoriteChanged(notification: NSNotification) {
+        let book = notification.object as? AGTBook
+        if let favorite = book?.isFavorite{
+            if favorite{
+                // Añadir a favoritos
+            }else{
+                // Eliminar de favoritos
+            }
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    deinit{
+        unsubscribeNotificationModel()
     }
 
 }

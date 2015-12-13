@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AGTLibrary {
+class AGTLibrary : NSObject {
     
     //MARK: - Properties
     private var books : [AGTBook]
@@ -17,7 +17,16 @@ class AGTLibrary {
     private var tags : [AGTTag]?{
         get{
             if let arrayTags = arrayOfTags{
-                return arrayTags.sort { $0.0.name.lowercaseString < $0.1.name.lowercaseString }
+                // ÑAPA
+                var tagsOrdered = arrayTags.sort { $0.0.name.lowercaseString < $0.1.name.lowercaseString }
+                let favoriteTag = AGTTag(name: "Favorite")
+                if tagsOrdered.contains(favoriteTag){
+                    if let position = tagsOrdered.indexOf(favoriteTag){
+                        tagsOrdered.removeAtIndex(position)
+                        tagsOrdered.insert(favoriteTag, atIndex: 0)
+                    }
+                }
+                return tagsOrdered
             }
             
             return nil
@@ -33,7 +42,9 @@ class AGTLibrary {
     init(arrayofBooks : [AGTBook], arrayOfTags: [AGTTag]){
         // Initi the dictcionary
         books = arrayofBooks
+        super.init()
         tags = arrayOfTags
+        subsCribeNotificationModel()
     }
     
     var booksCount: Int{
@@ -49,6 +60,14 @@ class AGTLibrary {
             }
             return 0
         }
+    }
+    
+    func subsCribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "favoriteChanged:", name: "FavoriteChanged", object: nil)
+    }
+    
+    func unsubscribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func bookCountForTag(tag: String) -> Int{
@@ -86,5 +105,22 @@ class AGTLibrary {
         }
         
         return nil
+    }
+    
+    func favoriteChanged(notification: NSNotification) {
+        let book = notification.object as? AGTBook
+        if let favorite = book?.isFavorite{
+            if favorite{
+                // Añadir a favoritos
+                arrayOfTags?.insert(AGTTag(name: "Favorite"), atIndex: 0)
+            }else{
+                // Eliminar de favoritos
+                arrayOfTags?.removeAtIndex(0)
+            }
+        }
+    }
+    
+    deinit{
+        unsubscribeNotificationModel()
     }
 }

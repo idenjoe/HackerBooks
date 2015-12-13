@@ -19,6 +19,7 @@ class AGTBookViewController: UIViewController {
     
     @IBOutlet weak var tagsLabel: UILabel!
     
+    @IBOutlet weak var favIconButton: DOFavoriteButton!
     var book : AGTBook?{
         didSet{
             updateUI()
@@ -28,6 +29,9 @@ class AGTBookViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Book"
+        if (book != nil){
+            updateUI()
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -38,13 +42,13 @@ class AGTBookViewController: UIViewController {
     }
     
     func updateUI() {
-        self.noBookView.hidden = true
+        noBookView?.hidden = true
         if let title = book?.title{
-            self.titleLabel.text = title
+            titleLabel?.text = title
         }
         
         if let authors = book?.authors{
-            self.authorsLabel.text = authors
+            authorsLabel?.text = authors
         }
         
         var tagsNames = [String]()
@@ -55,7 +59,40 @@ class AGTBookViewController: UIViewController {
             
             let unifiedTagString = tagsNames.joinWithSeparator(", ")
             
-            self.tagsLabel.text = unifiedTagString
+            tagsLabel?.text = unifiedTagString
+        }
+        if  bookImageView != nil{
+            if let imageURL = book?.imageURL {
+                let stringURL = "\(imageURL)"
+                ImageLoader.sharedLoader.imageForUrl(stringURL, completionHandler:{(image: UIImage?, url: String) in
+                    self.bookImageView.image = image
+                })
+            }
+        }
+        
+        if let isFavorite = book?.isFavorite{
+            if favIconButton != nil {
+                favIconButton.selected = isFavorite
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPDF"{
+            let pdfController = segue.destinationViewController as? AGTSimplePDFViewController
+            if let pdfURL = book?.pdfURL{
+                pdfController?.pdfURL = pdfURL
+            }
+        }
+    }
+    
+    @IBAction func favIconTapped(sender: DOFavoriteButton) {
+        if sender.selected {
+            sender.deselect()
+            book?.isFavorite = false
+        }else{
+            sender.select()
+            book?.isFavorite = true
         }
     }
 }
