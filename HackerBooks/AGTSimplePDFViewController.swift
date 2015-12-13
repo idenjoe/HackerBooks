@@ -21,6 +21,24 @@ class AGTSimplePDFViewController: UIViewController, UIWebViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        subsCribeNotificationModel()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeNotificationModel()
+    }
+    
+    func subsCribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "bookChanged:", name: "BookChanged", object: nil)
+    }
+    
+    func unsubscribeNotificationModel(){
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     func updateUI(){
         if pdfURL != nil{
             let urlRequest = NSURLRequest(URL: pdfURL!)
@@ -31,5 +49,9 @@ class AGTSimplePDFViewController: UIViewController, UIWebViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func bookChanged(notification: NSNotification){
+        updateUI()
     }
 }

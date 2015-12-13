@@ -127,7 +127,12 @@ class AGTLibraryTableViewController: UITableViewController {
         if (self.splitViewController?.viewControllers.count > 1) {
             let detailVC = self.splitViewController!.viewControllers[1] as? UINavigationController
             if detailVC?.viewControllers.count > 1{
+                if let viewControllers = detailVC?.viewControllers{
+                    let pdfController = viewControllers.last as? AGTSimplePDFViewController
+                    let cell = sender as? AGTBookViewCell
+                    pdfController?.pdfURL = cell?.book?.pdfURL
                 NSNotificationCenter.defaultCenter().postNotificationName("BookChanged", object: nil)
+                }
                 return false
             }
         }
