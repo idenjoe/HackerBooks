@@ -19,21 +19,56 @@ class AGTLibraryTableViewController: UITableViewController {
         // Leemos el fichero JSON a un NSDATA (esto puede salir mal)
         // Lo parseamos
         do{
-            if let url = NSURL(string: "https://t.co/K9ziV0z3SJ"),
-                data = NSData(contentsOfURL: url),
-                booksArray = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? JSONArray{
-                    // Todo es fabuloso!!!
-                    result = decode(books: booksArray)
-            }
+            let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let writePath = documents.stringByAppendingString("/books.json")
             
+            let firstLaunch = !NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
+            let fileExist = NSFileManager.defaultManager().fileExistsAtPath(writePath)
+            if firstLaunch {
+                if let url = NSURL(string: "https://t.co/K9ziV0z3SJ"),
+                    data = NSData(contentsOfURL: url),
+                    booksArray = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? JSONArray{
+                        saveData(data)
+                        // Todo es fabuloso!!!
+                        result = decode(books: booksArray)
+                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+                }
+            }
+            else if fileExist {
+                result = try loadJSONLocally()
+            }else{
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "FirstLaunch")
+            }
         }catch{
             // Error al parsear el JSON
-            print("la cagamos, en vez de un JSON, me mandaron un camisón del Dávalos")
-            
+            fatalError()
         }
         
         return result;
         
+    }
+    
+    func saveData(data: NSData){
+        let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+        let writePath = NSURL(fileURLWithPath: documents).URLByAppendingPathComponent("books.json")
+        data.writeToURL(writePath, atomically: false)
+    }
+    
+    func loadJSONLocally() throws -> [AGTBook]?{
+        do{
+            let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let writePath = NSURL(fileURLWithPath: documents).URLByAppendingPathComponent("books.json")
+            if let data = NSData(contentsOfURL: writePath),
+                booksArray = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? JSONArray{
+                    // Todo es fabuloso!!!
+                    return decode(books: booksArray)
+            }
+        }catch{
+            fatalError()
+        }
+        
+        
+        return nil
     }
     
     override func viewDidLoad() {
